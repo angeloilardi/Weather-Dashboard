@@ -1,8 +1,7 @@
 let key = "e8d54aa916b42d7a0757ed85e6afcf68";
-
-
-
 function getWeather(city) {
+    $("#today").empty();
+    $("#forecast").empty();
     let queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=metric";
     $.ajax({
         url: queryUrl,
@@ -38,17 +37,36 @@ let forecastDate = date;
             console.log(forecastIconUrl);
             let forecastCard = $("<div>");
             
-            forecastCard.addClass("card p-3")
+            forecastCard.addClass("card p-3 forecast-card bg-primary m-2")
             console.log(forecastCard);
           forecastCard.html(
             `<h3>${forecastDate}</h3>
-            <img src= ${iconUrl} alt= "weather icon"}>
+            <img class = "weather-icon" src= ${iconUrl} alt= "weather icon"}>
             <p>Temperature: ${temp} °C</p>
             <p>Humidity: ${humidity}%</p>
             <p>Wind Speed: ${wind} KPH</p>`);
-          $("#forecast").append(forecastCard)
-        }
+          $("#forecast").append(forecastCard);
+          
+        };
+        $("#history").append("<button>")
+          .text(city)
+          .addClass("bg-light history-button");     
+          let historyList = JSON.parse(localStorage.getItem("cities"));
+          console.log(historyList);
+          if (historyList === null){
+             historyList = [];
+          }
+          console.log(historyList);
+          localStorage.setItem("city", city);
+          historyList.push(city);       
+          localStorage.setItem("cities", JSON.stringify(historyList));
     })
 };
 
-getWeather("Amsterdam");
+// getWeather("Amsterdam");
+
+$("#search-button").on("click", function(event){
+    event.preventDefault();
+    let searchedCity = $("#search-input").val();
+    getWeather(searchedCity);
+})
