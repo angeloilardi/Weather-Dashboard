@@ -50,7 +50,7 @@ function getWeather(city) {
         };
         let newButton = $("<button>")
             .text(city)
-            .addClass("bg-light history-button");
+            .addClass("bg-light history-button m-2");
         $("#history").prepend(newButton)
         let historyList = JSON.parse(localStorage.getItem("cities"));
         if (historyList === null) historyList = [];
@@ -71,10 +71,16 @@ function renderButtons() {
         currentEntries.forEach(function (el) {
             createdButton = $("<button>")
                 .text(el)
-                .addClass("bg-light history-button");
+                .addClass("bg-light history-button m-2");
             $("#history").append(createdButton);
         })
     }
+    $(".history-button").each(function(){
+        $(this).on("click", function(event){
+            event.preventDefault();
+            getWeather($(this).text())
+        })
+    })
 }
 
 renderButtons();
