@@ -21,7 +21,7 @@ function getWeather(city) {
         <p>Temperature: ${todayTemp} °C</p>
         <p>Humidity: ${todayHumidity}%</p>
         <p>Wind Speed: ${todayWind} KPH</p>`);
-let forecastDate = date;
+        let forecastDate = date;
         let temp, humidity, forecastIcon, wind, forecastIconUrl;
         console.log(results.length);
         for (var i = 7; i < results.length; i += 8) {
@@ -36,37 +36,45 @@ let forecastDate = date;
             forecastIconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
             console.log(forecastIconUrl);
             let forecastCard = $("<div>");
-            
+
             forecastCard.addClass("card p-3 forecast-card bg-primary m-2")
             console.log(forecastCard);
-          forecastCard.html(
-            `<h3>${forecastDate}</h3>
+            forecastCard.html(
+                `<h3>${forecastDate}</h3>
             <img class = "weather-icon" src= ${iconUrl} alt= "weather icon"}>
             <p>Temperature: ${temp} °C</p>
             <p>Humidity: ${humidity}%</p>
             <p>Wind Speed: ${wind} KPH</p>`);
-          $("#forecast").append(forecastCard);
-          
+            $("#forecast").append(forecastCard);
+
         };
-        $("#history").append("<button>")
-          .text(city)
-          .addClass("bg-light history-button");     
-          let historyList = JSON.parse(localStorage.getItem("cities"));
-          console.log(historyList);
-          if (historyList === null){
-             historyList = [];
-          }
-          console.log(historyList);
-          localStorage.setItem("city", city);
-          historyList.push(city);       
-          localStorage.setItem("cities", JSON.stringify(historyList));
+        let newButton = $("<button>")
+            .text(city)
+            .addClass("bg-light history-button");
+        $("#history").prepend(newButton)
+        let historyList = JSON.parse(localStorage.getItem("cities"));
+        if (historyList === null) historyList = [];
+        historyList.push(city);
+        localStorage.setItem("cities", JSON.stringify(historyList));
     })
 };
 
-// getWeather("Amsterdam");
-
-$("#search-button").on("click", function(event){
+$("#search-button").on("click", function (event) {
     event.preventDefault();
     let searchedCity = $("#search-input").val();
     getWeather(searchedCity);
-})
+});
+
+function renderButtons() {
+    let currentEntries = JSON.parse(localStorage.getItem("cities"));
+    if (currentEntries !== null) {
+        currentEntries.forEach(function (el) {
+            createdButton = $("<button>")
+                .text(el)
+                .addClass("bg-light history-button");
+            $("#history").append(createdButton);
+        })
+    }
+}
+
+renderButtons();
