@@ -1,7 +1,42 @@
+
+* {
+    box-sizing: border-box;
+}
 .weather-icon {
     width: 40px;
 }
 
+.weather-hr {
+    border: 1px, solid, black;
+    position: relative;
+    top: 50px;
+    width: 100%;
+    height: 1px;
+}
+
 .forecast-card {
     background-color: #3150e9 ;
+    color: white;
+}
+
+.w-20 {
+width: 20%;
+}
+
+.card {
+    min-width: 300px;
+}
+
+.history-button::first-letter{
+    text-transform: uppercase;
+}
+
+.today-heading::first-letter{
+    text-transform: uppercase;
+}
+
+.history-button {
+    border: none;
+    border: 1px groove black;
+    border-radius: 5px;
 }
