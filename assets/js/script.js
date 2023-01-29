@@ -7,6 +7,7 @@ function getWeather(city) {
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
+        console.log(response);
         date = moment().format("DD/MM/YY");
         let results = response.list;
         let todayTemp = results[0].main.temp;

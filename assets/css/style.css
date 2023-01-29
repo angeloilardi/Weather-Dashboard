@@ -6,14 +6,6 @@
     width: 40px;
 }
 
-.weather-hr {
-    border: 1px, solid, black;
-    position: relative;
-    top: 50px;
-    width: 100%;
-    height: 1px;
-}
-
 .forecast-card {
     background-color: #3150e9 ;
     color: white;
