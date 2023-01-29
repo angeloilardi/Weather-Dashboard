@@ -84,3 +84,19 @@ function renderButtons() {
 }
 
 renderButtons();
+
+$("#history-collapse").click(function(){
+    $("#history").toggle();
+})
+
+$(window).on('resize', function(){
+    var win = $(this);
+    if (win.width() < 768) {
+        $("#history").hide();
+        $("#history-collapse").show();
+    };
+    if (win.width() > 768) {
+        $("#history").show();
+        $("#history-collapse").hide();
+    };
+});

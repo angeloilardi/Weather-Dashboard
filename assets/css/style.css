@@ -32,3 +32,14 @@ width: 20%;
     border: 1px groove black;
     border-radius: 5px;
 }
+
+#history-collapse {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    #history-collapse {
+        display: block;
+    }
+  }
+
