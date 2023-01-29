@@ -7,7 +7,6 @@ function getWeather(city) {
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
         date = moment().format("DD/MM/YY");
         let results = response.list;
         let todayTemp = results[0].main.temp;
@@ -37,7 +36,7 @@ function getWeather(city) {
             let forecastCard = $("<div>");
             forecastCard.addClass("card p-3 forecast-card bg-primary")
             forecastCard.html(
-            `<h3>${forecastDate}</h3>
+                `<h3>${forecastDate}</h3>
             <img class = "weather-icon" src= ${iconUrl} alt= "weather icon"}>
             <p>Temperature: ${temp} °C</p>
             <p>Humidity: ${humidity}%</p>
@@ -47,7 +46,13 @@ function getWeather(city) {
         let newButton = $("<button>")
             .text(city)
             .addClass("bg-light history-button m-2");
+
         $("#history").prepend(newButton);
+        newButton.on("click", function(event) {
+            event.preventDefault();
+            getWeather($(this).text());
+        });
+        if ($(window) < 768) $("#history").hide();
         let historyList = JSON.parse(localStorage.getItem("cities"));
         if (historyList === null) historyList = [];
         if (historyList.length > 9) {
@@ -56,13 +61,14 @@ function getWeather(city) {
         }
         historyList.unshift(city);
         localStorage.setItem("cities", JSON.stringify(historyList));
-    })
+    });
 };
 
 $("#search-button").on("click", function (event) {
     event.preventDefault();
     let searchedCity = $("#search-input").val();
     getWeather(searchedCity);
+    $("#search-input").val('');
 });
 
 function renderButtons() {
@@ -75,21 +81,25 @@ function renderButtons() {
             $("#history").append(createdButton);
         })
     }
-    $(".history-button").each(function(){
-        $(this).on("click", function(event){
+    $(".history-button").each(function () {
+        $(this).on("click", function (event) {
             event.preventDefault();
             getWeather($(this).text())
         })
-    })
+    });
+    if ($(window).width() < 768) $("#history").hide();
+    ;
+    ;
+
 }
 
-renderButtons();
 
-$("#history-collapse").click(function(){
+
+$("#history-collapse").click(function () {
     $("#history").toggle();
 })
 
-$(window).on('resize', function(){
+$(window).on('resize', function () {
     var win = $(this);
     if (win.width() < 768) {
         $("#history").hide();
@@ -100,3 +110,10 @@ $(window).on('resize', function(){
         $("#history-collapse").hide();
     };
 });
+
+$("#clear-history").on("click", function () {
+    $("#history").empty();
+    localStorage.removeItem("cities");
+})
+
+renderButtons();

@@ -26,7 +26,7 @@
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
-              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
+              <input class="form-input weather-search" type="text" id="search-input" placeholder=""
                 aria-labelledby="form-heading" aria-controls="today forecast" />
               <div class="input-group-append">
                 <button type="submit" class="btn search-button bg-primary" id="search-button" aria-label="submit search">
@@ -36,6 +36,7 @@
               
             </div>
             <div class="input-group-append mt-1"><button id="history-collapse" class= "btn btn-primary" type="button"  data-target="#history" aria-expanded="false" aria-controls="historyCollapse">Show History</button></div>
+            <div class="input-group-append mt-1"><button id="clear-history" class= "btn btn-primary" type="button"  data-target="#history" aria-expanded="false" aria-controls="clearHistory">Clear History</button></div>
           </div>
         </form>
         <div class="list-group" id="history"></div>
