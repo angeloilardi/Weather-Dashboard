@@ -19,12 +19,12 @@ width: 20%;
     min-width: 300px;
 }
 
-.history-button::first-letter{
-    text-transform: uppercase;
+.history-button {
+    text-transform: capitalize;
 }
 
-.today-heading::first-letter{
-    text-transform: uppercase;
+.today-heading {
+    text-transform: capitalize;
 }
 
 .history-button {
