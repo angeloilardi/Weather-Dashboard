@@ -82,6 +82,7 @@ $(document).ready(function(){
         });
     };
     
+    //event listener for searh button
     $("#search-button").on("click", function (event) {
         event.preventDefault();
         let searchedCity = $("#search-input").val();
@@ -89,6 +90,7 @@ $(document).ready(function(){
         $("#search-input").val('');
     });
     
+    // function to render buttons
     function renderButtons() {
         $("#history").empty();
         let currentEntries = JSON.parse(localStorage.getItem("cities"));
@@ -113,7 +115,7 @@ $(document).ready(function(){
     }
     
     
-    // adds event listener to the ''show history' button
+    // adds event listener to the 'show history' button
     $("#history-collapse").click(function () {
         $("#history").toggle();
     })
