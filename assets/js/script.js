@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     renderButtons();
     let key = "e8d54aa916b42d7a0757ed85e6afcf68";
     function getWeather(city) {
@@ -63,16 +63,16 @@ $(document).ready(function(){
                 <p>Wind Speed: ${wind} KPH</p>`);
                 $(cardsContainer).append(forecastCard);
             };
-            
+
             let historyList = JSON.parse(localStorage.getItem("cities"));
             if (historyList === null) historyList = [];
-            if (historyList.includes((city.toLowerCase()))){
+            if (historyList.includes((city.toLowerCase()))) {
                 historyList.splice(historyList.indexOf(city), 1)
                 console.log(historyList.indexOf(city));
                 console.log("yes");
             }
             // history is hidden on smaller screens
-            
+
             if (historyList.length > 9) {
                 historyList.pop();
             }
@@ -81,7 +81,7 @@ $(document).ready(function(){
             renderButtons();
         });
     };
-    
+
     //event listener for searh button
     $("#search-button").on("click", function (event) {
         event.preventDefault();
@@ -89,7 +89,7 @@ $(document).ready(function(){
         getWeather(searchedCity.toLowerCase());
         $("#search-input").val('');
     });
-    
+
     // function to render buttons
     function renderButtons() {
         $("#history").empty();
@@ -111,15 +111,15 @@ $(document).ready(function(){
         if ($(window).width() < 768) $("#history").hide();
         ;
         ;
-    
+
     }
-    
-    
+
+
     // adds event listener to the 'show history' button
     $("#history-collapse").click(function () {
         $("#history").toggle();
     })
-    
+
     // hides or unhides history
     $(window).on('resize', function () {
         var win = $(this);
@@ -132,13 +132,13 @@ $(document).ready(function(){
             $("#history-collapse").hide();
         };
     });
-    
+
     // event listener for the clear history button
     $("#clear-history").on("click", function () {
         $("#history").empty();
         localStorage.removeItem("cities");
     })
-    
+
 })
 
 
