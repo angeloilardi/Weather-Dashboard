@@ -9,17 +9,23 @@ $(document).ready(function () {
         let queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=metric";
         $.ajax({
             url: queryUrl,
-            method: "GET"
+            method: "GET",
+            error:function (xhr, thrownError){
+                if(xhr.status==404) {
+                    alert("City not found, try again");
+                }
+            }
         }).then(function (response) {
+            console.log(response);
             // variable for today's date
             date = moment().format("DD/MM/YY");
             // variable for the results array
             let results = response.list;
             // pulls temperature
             let todayTemp = results[0].main.temp;
-            // pulls hinidity
+            // pulls humidity
             let todayHumidity = results[0].main.humidity;
-            // pulls swind peed
+            // pulls wind speed
             let todayWind = results[0].wind.speed;
             // gets icon id
             let icon = results[0].weather[0].icon;
@@ -55,7 +61,7 @@ $(document).ready(function () {
                 let forecastCard = $("<div>");
                 forecastCard.addClass("card p-3 forecast-card bg-primary")
                 forecastCard.html(
-                    `<h3>${forecastDate}</h3>
+                `<h3>${forecastDate}</h3>
                 <img class = "weather-icon" src= ${iconUrl} alt= "weather icon"}>
                 <p>Temperature: ${temp} °C</p>
                 <p>Humidity: ${humidity}%</p>
@@ -139,6 +145,6 @@ $(document).ready(function () {
         localStorage.removeItem("cities");
     })
 
-})
+});
 
 
