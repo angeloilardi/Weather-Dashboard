@@ -2,7 +2,6 @@ $(document).ready(function () {
     renderButtons();
     let key = "e8d54aa916b42d7a0757ed85e6afcf68";
     function getWeather(city) {
-        console.log(city);
         // resets the dashboard
         $("#today").empty();
         $("#forecast").empty();
@@ -63,21 +62,22 @@ $(document).ready(function () {
                 <p>Wind Speed: ${wind} KPH</p>`);
                 $(cardsContainer).append(forecastCard);
             };
-
+            // parses the local storage cities array
             let historyList = JSON.parse(localStorage.getItem("cities"));
             if (historyList === null) historyList = [];
-            if (historyList.includes((city.toLowerCase()))) {
+            // if the city is alredy in the history then it's deleted 
+            if (historyList.includes(city)) {
                 historyList.splice(historyList.indexOf(city), 1)
-                console.log(historyList.indexOf(city));
-                console.log("yes");
             }
-            // history is hidden on smaller screens
-
+            // if the limit of 10 cities is reached, the oldest entry is removed
             if (historyList.length > 9) {
                 historyList.pop();
             }
+            // the new city is added to the local storage array
             historyList.unshift(city);
+            // the array is finally saved as a local store object
             localStorage.setItem("cities", JSON.stringify(historyList));
+            // buttons are re-rendered 
             renderButtons();
         });
     };
