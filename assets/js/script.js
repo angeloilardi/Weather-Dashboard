@@ -99,6 +99,7 @@ $(document).ready(function () {
     // function to render buttons
     function renderButtons() {
         $("#history").empty();
+        if ($(window).width() > 768) $("#history-collapse").hide();
         let currentEntries = JSON.parse(localStorage.getItem("cities"));
         if (currentEntries !== null) {
             currentEntries.forEach(function (el) {
