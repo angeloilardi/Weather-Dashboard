@@ -6,7 +6,8 @@ A handy 5-day forecast weather dashboard
 
 ## Usage
 
-This weather dashobaord allows to user to check the weather anywhere in world. Upon entering a city name in the search box and hitting 'Search', the current weather condition in that city will be displyed. A 5-day forecast will also be displayed underneath.
+This weather dashobaord allows the
+ user to check the weather anywhere in world. Upon entering a city name in the search box and hitting 'Search', the current weather condition in that city will be displyed. A 5-day forecast will also be displayed underneath.
 
 The parameters checked are: temperature, wind speed, humidity.
 
@@ -32,5 +33,6 @@ The application also prevents any duplicate cities from being added to the Histo
 - Bootstrap
 - JavaScript
 - jQuery
+- jQueryUI
 - Moment.js
 - [Open Weather API] (https://openweathermap.org/)
