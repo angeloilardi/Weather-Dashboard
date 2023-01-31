@@ -1,5 +1,7 @@
 $(document).ready(function () {
+
     renderButtons();
+
     let key = "e8d54aa916b42d7a0757ed85e6afcf68";
     function getWeather(city) {
         // resets the dashboard
@@ -88,7 +90,7 @@ $(document).ready(function () {
         });
     };
 
-    //event listener for searh button
+    //event listener for search button
     $("#search-button").on("click", function (event) {
         event.preventDefault();
         let searchedCity = $("#search-input").val();
@@ -125,6 +127,12 @@ $(document).ready(function () {
     // adds event listener to the 'show history' button
     $("#history-collapse").click(function () {
         $("#history").toggle();
+    });
+
+     // event listener for the clear history button
+     $("#clear-history").on("click", function () {
+        $("#history").empty();
+        localStorage.removeItem("cities");
     })
 
     // hides or unhides history
@@ -139,13 +147,6 @@ $(document).ready(function () {
             $("#history-collapse").hide();
         };
     });
-
-    // event listener for the clear history button
-    $("#clear-history").on("click", function () {
-        $("#history").empty();
-        localStorage.removeItem("cities");
-    })
-
 });
 
 
