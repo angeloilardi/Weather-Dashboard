@@ -12,9 +12,20 @@ $(document).ready(function () {
         $.ajax({
             url: queryUrl,
             method: "GET",
-            error:function (xhr, thrownError){
-                if(xhr.status==404) {
-                    alert("City not found, try again");
+            error: function (xhr, thrownError) {
+                if (xhr.status == 404) {
+                    // alert("City not found, try again");
+                    let alert = $("<div>")
+                    //.text("City not found, please try again")
+                    $(alert).append("<p>Please try again</p>")
+                    $(alert).dialog({
+                        title: "City not found",
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
                 }
             }
         }).then(function (response) {
@@ -63,7 +74,7 @@ $(document).ready(function () {
                 let forecastCard = $("<div>");
                 forecastCard.addClass("card p-3 forecast-card bg-primary")
                 forecastCard.html(
-                `<h3>${forecastDate}</h3>
+                    `<h3>${forecastDate}</h3>
                 <img class = "weather-icon" src= ${iconUrl} alt= "weather icon"}>
                 <p>Temperature: ${temp} °C</p>
                 <p>Humidity: ${humidity}%</p>
@@ -129,8 +140,8 @@ $(document).ready(function () {
         $("#history").toggle();
     });
 
-     // event listener for the clear history button
-     $("#clear-history").on("click", function () {
+    // event listener for the clear history button
+    $("#clear-history").on("click", function () {
         $("#history").empty();
         localStorage.removeItem("cities");
     })
